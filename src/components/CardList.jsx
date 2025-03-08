@@ -1,6 +1,7 @@
 import { useState } from "react";
 import useFetchData from "../hooks/useFetchData";
 import Card from "./Card";
+import Loading from "./Loading";
 
 function CardList() {
   const { items, status, error } = useFetchData();
@@ -11,12 +12,7 @@ function CardList() {
   const startIndex = (currentPage - 1) * itemPerPage;
   const currentItems = items.slice(startIndex, startIndex + itemPerPage);
 
-  if (status === "loading")
-    return (
-      <div className="flex items-center justify-center h-screen">
-        <h4 className="text-lg font-semibold text-blue-700">Loading.....</h4>
-      </div>
-    );
+  if (status === "loading") return <Loading/>;
   if (status === "failed")
     return (
       <div className="flex items-center justify-center h-screen">

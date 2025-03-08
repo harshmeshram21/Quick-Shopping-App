@@ -1,14 +1,32 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import ReactDOM from "react-dom/client";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "./app/store";
-import App from "./App";
-import Cart from "./components/Cart";
+// import Cart from "./components/Cart";
+// import Home from "./pages/Home";
+import Layout from "./layouts/Layout";
+import Loading from "./components/Loading";
+
+const Home = lazy(() => import("./pages/Home"));
+const Cart = lazy(() => import("./components/Cart"));
 
 const router = createBrowserRouter([
-  { path: "/", element: <App /> },
-  { path: "/cart", element: <Cart /> },
+  {
+    path: "/",
+    element: <Layout />,
+    children: [
+      {
+        path: "/",
+        element: (
+          <Suspense fallback={<Loading />}>
+            <Home />
+          </Suspense>
+        ),
+      },
+      { path: "/cart", element: <Cart /> },
+    ],
+  },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(

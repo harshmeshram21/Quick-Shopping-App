@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { FaShoppingCart, FaUser, FaBars, FaTimes } from "react-icons/fa";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { selectCartCount } from "../features/cartSlice";
 
 function NavBar() {
@@ -37,7 +37,7 @@ function NavBar() {
           } lg:flex lg:items-center lg:space-x-8 p-4 lg:p-0`}
         >
           {/* Navigation Links */}
-          <ul className="flex flex-col lg:flex-row lg:space-x-8 text-sm font-medium">
+          {/* <ul className="flex flex-col lg:flex-row lg:space-x-8 text-sm font-medium">
             <li>
               <a href="/" className="text-white! block py-2 px-6 lg:px-0">
                 Home
@@ -47,6 +47,21 @@ function NavBar() {
               <a href="#" className="text-white! block py-2 px-6 lg:px-0">
                 Contact
               </a>
+            </li>
+          </ul> */}
+          <ul className="flex flex-col lg:flex-row lg:space-x-8 text-sm font-medium">
+            <li>
+              <Link to="/" className="text-white! block py-2 px-6 lg:px-0">
+                Home
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/contact"
+                className="text-white! block py-2 px-6 lg:px-0"
+              >
+                Contact
+              </Link>
             </li>
           </ul>
 
