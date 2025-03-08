@@ -1,20 +1,19 @@
-import { FaShoppingCart, FaUser } from "react-icons/fa";
+import { useState } from "react";
+import { FaShoppingCart, FaUser, FaBars, FaTimes } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { selectCartCount } from "../features/cartSlice";
 
 function NavBar() {
-  // const cartItems = useSelector((state) => state.cart.items);
-  // const cartCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
-  const cartCount = useSelector(selectCartCount); // ✅ Use selector for cart count
-
+  const cartCount = useSelector(selectCartCount);
   const navigate = useNavigate();
-  // console.log("rendered...");
+  const [menuOpen, setMenuOpen] = useState(false);
+
   return (
-    <nav className="bg-blue-500 text-white p-4 shadow-md">
-      <div className="container mx-auto flex justify-between items-center">
+    <nav className="bg-blue-500 text-white shadow-md">
+      <div className="mx-auto max-w-screen-xl px-6 flex justify-between items-center py-4">
         {/* Left Side: Logo */}
-        <div className="flex items-center space-x-6">
+        <div className="flex items-center space-x-4">
           <img
             src="https://i.pinimg.com/736x/df/70/fc/df70fc7f957c5811ff783ad0efdd4966.jpg"
             alt="Quick Shopping Logo"
@@ -23,31 +22,48 @@ function NavBar() {
           <h1 className="text-xl font-bold">Quick Shopping</h1>
         </div>
 
+        {/* Mobile Menu Button */}
+        <button
+          className="lg:hidden text-2xl"
+          onClick={() => setMenuOpen(!menuOpen)}
+        >
+          {menuOpen ? <FaTimes /> : <FaBars />}
+        </button>
+
         {/* Right Side: Navigation Links, Profile & Cart */}
-        <div className="flex items-center space-x-5">
-          <ul className="flex space-x-6 text-sm font-medium">
+        <div
+          className={`absolute lg:static top-16 left-0 w-full lg:w-auto bg-blue-500 lg:bg-transparent transition-transform duration-300 ${
+            menuOpen ? "block" : "hidden"
+          } lg:flex lg:items-center lg:space-x-8 p-4 lg:p-0`}
+        >
+          {/* Navigation Links */}
+          <ul className="flex flex-col lg:flex-row lg:space-x-8 text-sm font-medium">
             <li>
-              <a href="/" className="text-white!">
+              <a href="/" className="text-white! block py-2 px-6 lg:px-0">
                 Home
               </a>
             </li>
             <li>
-              <a href="#" className="text-white!">
+              <a href="#" className="text-white! block py-2 px-6 lg:px-0">
                 Contact
               </a>
             </li>
           </ul>
-          <button className="flex items-center space-x-2 cursor-pointer ">
-            <FaUser />
-            <span>Profile</span>
-          </button>
-          <button
-            onClick={() => navigate("/cart")}
-            className="flex items-center space-x-2 cursor-pointer "
-          >
-            <FaShoppingCart />
-            <span>Cart {cartCount > 0 && `${cartCount}`}</span>
-          </button>
+
+          {/* Profile & Cart */}
+          <div className="flex flex-col lg:flex-row lg:items-center space-y-4 lg:space-y-0 lg:space-x-6 mt-4 lg:mt-0">
+            <button className="flex items-center space-x-2 cursor-pointer">
+              <FaUser />
+              <span>Profile</span>
+            </button>
+            <button
+              onClick={() => navigate("/cart")}
+              className="flex items-center space-x-2 cursor-pointer"
+            >
+              <FaShoppingCart />
+              <span>Cart {cartCount > 0 && `${cartCount}`}</span>
+            </button>
+          </div>
         </div>
       </div>
     </nav>

@@ -9,7 +9,7 @@ function CardList() {
 
   const totalPage = Math.ceil(items.length / itemPerPage);
   const startIndex = (currentPage - 1) * itemPerPage;
-  const curentItems = items.slice(startIndex, startIndex + itemPerPage);
+  const currentItems = items.slice(startIndex, startIndex + itemPerPage);
 
   if (status === "loading")
     return (
@@ -25,31 +25,36 @@ function CardList() {
     );
 
   return (
-    <div>
+    <div className="mx-auto max-w-screen-xl px-4">
       {/* displaying cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-6">
-        {curentItems.map((product) => (
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 py-6">
+        {currentItems.map((product) => (
           <Card key={product.id} product={product} />
         ))}
       </div>
 
-      {/* pegination */}
-
-      <div className="flex justify-center m-2 gap-10">
+      {/* pagination */}
+      <div className="flex justify-center items-center mt-4 space-x-4">
         <button
-          className={`bg-blue-500 px-4 py-1 rounded-lg cursor-pointer
-           ${currentPage === 1 ? "bg-gray-300" : "bg-blue-500"}  `}
+          className={`px-4 py-2 rounded-lg transition ${
+            currentPage === 1
+              ? "bg-gray-300 cursor-not-allowed"
+              : "bg-blue-500 text-white hover:bg-blue-600"
+          }`}
+          disabled={currentPage === 1}
           onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
         >
           Prev
         </button>
-        <span>{`${currentPage} of ${totalPage}`}</span>
+        <span className="text-lg font-medium">{`${currentPage} of ${totalPage}`}</span>
         <button
-          className={` px-4 py-1 rounded-lg cursor-pointer
-            ${currentPage === totalPage ? "bg-gray-300" : "bg-blue-500"}
-            `}
+          className={`px-4 py-2 rounded-lg transition ${
+            currentPage === totalPage
+              ? "bg-gray-300 cursor-not-allowed"
+              : "bg-blue-500 text-white hover:bg-blue-600"
+          }`}
           disabled={currentPage === totalPage}
-          onClick={() => setCurrentPage((prev) => Math.max(prev + 1, 1))}
+          onClick={() => setCurrentPage((prev) => prev + 1)}
         >
           Next
         </button>
