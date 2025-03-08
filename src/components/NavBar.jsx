@@ -1,5 +1,12 @@
 import { useState } from "react";
-import { FaShoppingCart, FaUser, FaBars, FaTimes } from "react-icons/fa";
+import {
+  FaShoppingCart,
+  FaHome,
+  FaUser,
+  FaBars,
+  FaTimes,
+  FaEnvelope,
+} from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { selectCartCount } from "../features/cartSlice";
@@ -30,54 +37,56 @@ function NavBar() {
           {menuOpen ? <FaTimes /> : <FaBars />}
         </button>
 
-        {/* Right Side: Navigation Links, Profile & Cart */}
+        {/* Right Side: Navigation Links + Profile & Cart */}
         <div
           className={`absolute lg:static top-16 left-0 w-full lg:w-auto bg-blue-500 lg:bg-transparent transition-transform duration-300 ${
-            menuOpen ? "block" : "hidden"
+            menuOpen ? "flex flex-col lg:flex-row" : "hidden"
           } lg:flex lg:items-center lg:space-x-8 p-4 lg:p-0`}
         >
-          {/* Navigation Links */}
-          <ul className="flex flex-col lg:flex-row lg:space-x-8 text-sm font-medium">
+          {/* Wrapped Home, Contact, Profile & Cart in one div */}
+          <ul className="flex flex-col lg:flex-row lg:items-center lg:space-x-6 space-y-2 lg:space-y-0">
             <li>
               <Link
                 to="/"
-                className="text-white! block py-2 px-6 lg:px-0"
+                className="flex items-center space-x-2 text-white! block py-2 px-4"
                 onClick={() => setMenuOpen(false)}
               >
-                Home
+                <FaHome />
+                <span>Home</span>
               </Link>
             </li>
             <li>
               <Link
                 to="/contact"
-                className="text-white! block py-2 px-6 lg:px-0"
+                className="flex items-center space-x-2 text-white! block py-2 px-4"
                 onClick={() => setMenuOpen(false)}
               >
-                Contact
+                <FaEnvelope />
+                <span>Contact</span>
               </Link>
             </li>
+            <li>
+              <button
+                className="flex items-center space-x-2 cursor-pointer py-2 px-4"
+                onClick={() => setMenuOpen(false)}
+              >
+                <FaUser />
+                <span>Profile</span>
+              </button>
+            </li>
+            <li>
+              <button
+                onClick={() => {
+                  navigate("/cart");
+                  setMenuOpen(false);
+                }}
+                className="flex items-center space-x-2 cursor-pointer py-2 px-4"
+              >
+                <FaShoppingCart />
+                <span>Cart {cartCount > 0 && `${cartCount}`}</span>
+              </button>
+            </li>
           </ul>
-
-          {/* Profile & Cart */}
-          <div className="flex flex-col lg:flex-row lg:items-center space-y-4 lg:space-y-0 lg:space-x-6 mt-4 lg:mt-0">
-            <button
-              className="flex items-center space-x-2 cursor-pointer"
-              onClick={() => setMenuOpen(false)}
-            >
-              <FaUser />
-              <span>Profile</span>
-            </button>
-            <button
-              onClick={() => {
-                navigate("/cart");
-                setMenuOpen(false);
-              }}
-              className="flex items-center space-x-2 cursor-pointer"
-            >
-              <FaShoppingCart />
-              <span>Cart {cartCount > 0 && `${cartCount}`}</span>
-            </button>
-          </div>
         </div>
       </div>
     </nav>
