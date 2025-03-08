@@ -37,21 +37,13 @@ function NavBar() {
           } lg:flex lg:items-center lg:space-x-8 p-4 lg:p-0`}
         >
           {/* Navigation Links */}
-          {/* <ul className="flex flex-col lg:flex-row lg:space-x-8 text-sm font-medium">
-            <li>
-              <a href="/" className="text-white! block py-2 px-6 lg:px-0">
-                Home
-              </a>
-            </li>
-            <li>
-              <a href="#" className="text-white! block py-2 px-6 lg:px-0">
-                Contact
-              </a>
-            </li>
-          </ul> */}
           <ul className="flex flex-col lg:flex-row lg:space-x-8 text-sm font-medium">
             <li>
-              <Link to="/" className="text-white! block py-2 px-6 lg:px-0">
+              <Link
+                to="/"
+                className="text-white! block py-2 px-6 lg:px-0"
+                onClick={() => setMenuOpen(false)}
+              >
                 Home
               </Link>
             </li>
@@ -59,6 +51,7 @@ function NavBar() {
               <Link
                 to="/contact"
                 className="text-white! block py-2 px-6 lg:px-0"
+                onClick={() => setMenuOpen(false)}
               >
                 Contact
               </Link>
@@ -67,12 +60,18 @@ function NavBar() {
 
           {/* Profile & Cart */}
           <div className="flex flex-col lg:flex-row lg:items-center space-y-4 lg:space-y-0 lg:space-x-6 mt-4 lg:mt-0">
-            <button className="flex items-center space-x-2 cursor-pointer">
+            <button
+              className="flex items-center space-x-2 cursor-pointer"
+              onClick={() => setMenuOpen(false)}
+            >
               <FaUser />
               <span>Profile</span>
             </button>
             <button
-              onClick={() => navigate("/cart")}
+              onClick={() => {
+                navigate("/cart");
+                setMenuOpen(false);
+              }}
               className="flex items-center space-x-2 cursor-pointer"
             >
               <FaShoppingCart />
