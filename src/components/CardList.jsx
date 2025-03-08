@@ -25,7 +25,7 @@ function CardList() {
     );
   //  sm:px-2
   return (
-    <div className="mx-auto max-w-screen-xl px-8">
+    <div className="mx-auto max-w-full px-8 sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl">
       {/* displaying cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-14 py-6">
         {currentItems.map((product) => (
