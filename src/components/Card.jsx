@@ -40,7 +40,7 @@ function Card({ product }) {
         <p className="text-sm text-gray-600">
           Price:{" "}
           <span className="text-blue-600 font-bold">
-            ₹{product.price.toFixed(2)}
+            ${product.price.toFixed(2)}
           </span>
         </p>
         <p className="text-sm text-gray-600">

@@ -23,11 +23,11 @@ function CardList() {
         <h4 className="text-lg font-semibold text-red-600">{error}</h4>
       </div>
     );
-
+  //  sm:px-2
   return (
-    <div className="mx-auto max-w-screen-xl px-4">
+    <div className="mx-auto max-w-screen-xl   px-10 ">
       {/* displaying cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 py-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-14 py-6">
         {currentItems.map((product) => (
           <Card key={product.id} product={product} />
         ))}

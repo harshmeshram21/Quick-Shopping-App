@@ -9,7 +9,6 @@ import {
 function Cart() {
   const cartItems = useSelector((state) => state.cart.items);
   const dispatch = useDispatch();
-  // console.log(cartItems);
 
   // Calculate total payable amount
   const totalAmount = cartItems.reduce(
@@ -18,37 +17,46 @@ function Cart() {
   );
 
   return (
-    <div className="container mx-auto p-5">
-      <h2 className="text-2xl font-bold mb-4">Shopping Cart</h2>
+    <div className="container mx-auto p-4 md:p-5">
+      <h2 className="text-xl md:text-2xl font-bold mb-4 text-center">
+        Shopping Cart
+      </h2>
+
       {cartItems.length === 0 ? (
-        <p>Your cart is empty.</p>
+        <p className="text-center text-gray-600">Your cart is empty.</p>
       ) : (
         <>
-          <ul className="space-y-2">
+          <ul className="space-y-3">
             {cartItems.map((item) => (
               <li
                 key={item.id}
-                className="p-2 bg-gray-200 rounded-md flex justify-between items-center transition duration-200 hover:bg-gray-300"
+                className="p-3 bg-gray-100 rounded-md flex flex-col sm:flex-row justify-between items-center gap-2 shadow-sm transition duration-200 hover:bg-gray-200"
               >
-                <span>
-                  {item.title} - Price: ${item.price.toFixed(2)} - Quantity:{" "}
-                  {item.quantity}
-                </span>
-                <div className="space-x-2">
+                <div className="text-center sm:text-left">
+                  <span className="block font-medium text-sm sm:text-base">
+                    {item.title}
+                  </span>
+                  <span className="text-gray-600 text-xs sm:text-sm">
+                    Price: ${item.price.toFixed(2)} - Quantity: {item.quantity}
+                  </span>
+                </div>
+
+                {/* Buttons */}
+                <div className="flex gap-2 flex-wrap justify-center">
                   <button
-                    className="px-2 py-1 bg-green-500 text-white rounded transition duration-200 hover:bg-green-600"
+                    className="px-3 py-1 bg-green-500 text-white rounded-md text-sm transition hover:bg-green-600"
                     onClick={() => dispatch(increaseQuantity(item.id))}
                   >
                     +
                   </button>
                   <button
-                    className="px-2 py-1 bg-red-500 text-white rounded transition duration-200 hover:bg-red-600"
+                    className="px-3 py-1 bg-red-500 text-white rounded-md text-sm transition hover:bg-red-600"
                     onClick={() => dispatch(decreaseQuantity(item.id))}
                   >
                     -
                   </button>
                   <button
-                    className="px-2 py-1 bg-gray-500 text-white rounded transition duration-200 hover:bg-gray-600"
+                    className="px-3 py-1 bg-gray-500 text-white rounded-md text-sm transition hover:bg-gray-600"
                     onClick={() => dispatch(removeItem(item.id))}
                   >
                     Remove
@@ -57,17 +65,24 @@ function Cart() {
               </li>
             ))}
           </ul>
-          <div className="mt-4">
-            <h3 className="text-lg font-semibold">
-              Total Payable Amount: ${totalAmount.toFixed(2)}
+
+          {/* Total Amount */}
+          <div className="mt-6 text-center">
+            <h3 className="text-lg sm:text-xl font-semibold">
+              Total Payable:{" "}
+              <span className="text-blue-600">${totalAmount.toFixed(2)}</span>
             </h3>
           </div>
-          <button
-            className="mt-4 p-2 bg-blue-500 text-white rounded transition duration-200 hover:bg-blue-600"
-            onClick={() => dispatch(clearCart())}
-          >
-            Clear Cart
-          </button>
+
+          {/* Clear Cart Button */}
+          <div className="flex justify-center mt-4">
+            <button
+              className="px-4 py-2 bg-blue-500 text-white rounded-md text-sm sm:text-base transition hover:bg-blue-600"
+              onClick={() => dispatch(clearCart())}
+            >
+              Clear Cart
+            </button>
+          </div>
         </>
       )}
     </div>
@@ -75,145 +90,3 @@ function Cart() {
 }
 
 export default Cart;
-
-// // import { useSelector, useDispatch } from "react-redux";
-// // import {
-// //   increaseQuantity,
-// //   decreaseQuantity,
-// //   removeItem,
-// //   clearCart,
-// // } from "../features/cartSlice";
-
-// // function Cart() {
-// //   const cartItems = useSelector((state) => state.cart.items);
-// //   const dispatch = useDispatch();
-
-// //   return (
-// //     <div className="container mx-auto p-5">
-// //       <h2 className="text-2xl font-bold mb-4">Shopping Cart</h2>
-// //       {cartItems.length === 0 ? (
-// //         <p>Your cart is empty.</p>
-// //       ) : (
-// //         <>
-// //           <ul className="space-y-2">
-// //             {cartItems.map((item) => (
-// //               <li
-// //                 key={item.id}
-// //                 className="p-2 bg-gray-200 rounded-md flex justify-between items-center"
-// //               >
-// //                 <span>
-// //                   {item.title} - Price: ${item.price.toFixed(2)} - Quantity:{" "}
-// //                   {item.quantity}
-// //                 </span>
-// //                 <div className="space-x-2">
-// //                   <button
-// //                     className="px-2 py-1 bg-green-500 text-white rounded"
-// //                     onClick={() => dispatch(increaseQuantity(item.id))}
-// //                   >
-// //                     +
-// //                   </button>
-// //                   <button
-// //                     className="px-2 py-1 bg-red-500 text-white rounded"
-// //                     onClick={() => dispatch(decreaseQuantity(item.id))}
-// //                   >
-// //                     -
-// //                   </button>
-// //                   <button
-// //                     className="px-2 py-1 bg-gray-500 text-white rounded"
-// //                     onClick={() => dispatch(removeItem(item.id))}
-// //                   >
-// //                     Remove
-// //                   </button>
-// //                 </div>
-// //               </li>
-// //             ))}
-// //           </ul>
-// //           <button
-// //             className="mt-4 p-2 bg-blue-500 text-white rounded"
-// //             onClick={() => dispatch(clearCart())}
-// //           >
-// //             Clear Cart
-// //           </button>
-// //         </>
-// //       )}
-// //     </div>
-// //   );
-// // }
-
-// // export default Cart;
-// import { useSelector, useDispatch } from "react-redux";
-// import {
-//   increaseQuantity,
-//   decreaseQuantity,
-//   removeItem,
-//   clearCart,
-// } from "../features/cartSlice";
-
-// function Cart() {
-//   const cartItems = useSelector((state) => state.cart.items);
-//   const dispatch = useDispatch();
-//   console.log(cartItems);
-//   // Calculate total payable amount
-//   const totalAmount = cartItems.reduce(
-//     (total, item) => total + item.price * item.quantity,
-//     0
-//   );
-
-//   return (
-//     <div className="container mx-auto p-5">
-//       <h2 className="text-2xl font-bold mb-4">Shopping Cart</h2>
-//       {cartItems.length === 0 ? (
-//         <p>Your cart is empty.</p>
-//       ) : (
-//         <>
-//           <ul className="space-y-2">
-//             {cartItems.map((item) => (
-//               <li
-//                 key={item.id}
-//                 className="p-2 bg-gray-200 rounded-md flex justify-between items-center"
-//               >
-//                 <span>
-//                   {item.title} - Price: ${item.price.toFixed(2)} - Quantity:{" "}
-//                   {item.quantity}
-//                 </span>
-//                 <div className="space-x-2">
-//                   <button
-//                     className="px-2 py-1 bg-green-500 text-white rounded"
-//                     onClick={() => dispatch(increaseQuantity(item.id))}
-//                   >
-//                     +
-//                   </button>
-//                   <button
-//                     className="px-2 py-1 bg-red-500 text-white rounded"
-//                     onClick={() => dispatch(decreaseQuantity(item.id))}
-//                   >
-//                     -
-//                   </button>
-//                   <button
-//                     className="px-2 py-1 bg-gray-500 text-white rounded"
-//                     onClick={() => dispatch(removeItem(item.id))}
-//                   >
-//                     Remove
-//                   </button>
-//                 </div>
-//               </li>
-//             ))}
-//           </ul>
-//           <div className="mt-4">
-//             <h3 className="text-lg font-semibold">
-//               Total Payable Amount: ${totalAmount.toFixed(2)}
-//             </h3>
-//           </div>
-//           <button
-//             className="mt-4 p-2 bg-blue-500 text-white rounded"
-//             onClick={() => dispatch(clearCart())}
-//           >
-//             Clear Cart
-//           </button>
-//         </>
-//       )}
-//     </div>
-//   );
-// }
-
-// export default Cart;
