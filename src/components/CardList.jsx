@@ -27,7 +27,7 @@ function CardList() {
   return (
     <div className="mx-auto max-w-screen-xl   px-10 ">
       {/* displaying cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-14 py-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 py-6">
         {currentItems.map((product) => (
           <Card key={product.id} product={product} />
         ))}
