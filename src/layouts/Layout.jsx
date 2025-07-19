@@ -1,14 +1,19 @@
 import { Outlet } from "react-router-dom";
 import NavBar from "../components/NavBar";
+import Footer from "../components/Footer";
 
 const Layout = () => {
   return (
-    <>
+    <div className="flex flex-col min-h-screen">
       <NavBar />
-      {/* <div className="container mx-auto p-4"> */}
-      <Outlet />
-      {/* </div> */}
-    </>
+
+      {/* Main content area grows to fill remaining space */}
+      <main className="flex-grow">
+        <Outlet />
+      </main>
+
+      <Footer />
+    </div>
   );
 };
 

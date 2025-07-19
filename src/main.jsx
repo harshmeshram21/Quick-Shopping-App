@@ -7,6 +7,7 @@ import store from "./app/store";
 // import Home from "./pages/Home";
 import Layout from "./layouts/Layout";
 import Loading from "./components/Loading";
+import Contact from "./components/Contact";
 
 const Home = lazy(() => import("./pages/Home"));
 const Cart = lazy(() => import("./components/Cart"));
@@ -25,6 +26,7 @@ const router = createBrowserRouter([
         ),
       },
       { path: "/cart", element: <Cart /> },
+      { path: "/contact", element: <Contact /> },
     ],
   },
 ]);
