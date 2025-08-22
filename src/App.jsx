@@ -1,13 +1,6 @@
-import NavBar from "./components/NavBar";
-import Home from "./pages/Home";
+import Layout from "/src/layouts/Layout";
 
 function App() {
-  return (
-    <>
-      <NavBar />
-      <Home />
-    </>
-  );
+ return <Layout />;
 }
-
 export default App;
