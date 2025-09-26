@@ -47,7 +47,7 @@ function NavBar() {
           <ul className="flex flex-col lg:flex-row lg:items-center lg:space-x-6 space-y-2 lg:space-y-0">
             <li>
               <Link
-                to="/"
+                to="/home"
                 className="flex items-center space-x-2 text-white! block py-2 px-4"
                 onClick={() => setMenuOpen(false)}
               >
