@@ -40,13 +40,13 @@ const Cart = lazy(() => import("./components/Cart"));
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <PublicLayout />, // 👈 Login-only layout (no header/footer)
+    element: <PublicLayout />, //  Login-only layout (no header/footer)
     errorElement: <NotFound />,
     children: [{ path: "/", element: <Login /> }],
   },
   {
     path: "/",
-    element: <Layout />, // 👈 Main layout with NavBar + Footer
+    element: <Layout />, //  Main layout with NavBar + Footer
     children: [
       {
         path: "/home",
