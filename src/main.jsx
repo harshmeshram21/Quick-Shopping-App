@@ -8,6 +8,7 @@ import Contact from "./components/Contact";
 import Login from "./pages/Login";
 import PublicLayout from "./layouts/PublicLayout";
 import Layout from "./layouts/Layout";
+import NotFound from "./components/NotFound";
 
 const Home = lazy(() => import("./pages/Home"));
 const Cart = lazy(() => import("./components/Cart"));
@@ -40,6 +41,7 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <PublicLayout />, // 👈 Login-only layout (no header/footer)
+    errorElement: <NotFound />,
     children: [{ path: "/", element: <Login /> }],
   },
   {
@@ -57,6 +59,10 @@ const router = createBrowserRouter([
       { path: "/cart", element: <Cart /> },
       { path: "/contact", element: <Contact /> },
     ],
+  },
+  {
+    path: "*", 
+    element: <NotFound />,
   },
 ]);
 
